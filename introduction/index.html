@@ -7,8 +7,176 @@
     <title>Formation JS - ES - 2022-07-04</title>
     <link rel="stylesheet" href="../css/bootstrap.css" media="all" />
     <script src="../js/bootstrap.bundle.js"></script>
-</head>
+    <script>
+        /* script JS */
+        /**
+         * Bonne forme du commentaire en bloc
+        */
 
+        /* variable déclaration */
+        var prenom = 'Jean';
+        console.log(prenom);
+
+        function affPrenom(){
+            console.log(prenom);
+            prenom = 'jon';
+        }
+
+        affPrenom();
+        console.log(prenom);
+
+        let nom = 'Neige';
+        console.log(nom);
+
+        function affNom(){
+            let nom = '';
+            console.log(nom);
+            nom = 'snow';
+        }
+        
+        affNom();
+        console.log(nom);
+
+        console.log(typeof prenom);
+        prenom = 12;
+        console.log(typeof prenom);
+
+        prenom = {
+            civilite: 'Mr',
+            age: '42',
+            test: function(){
+                console.log('hello world');
+            }
+        };
+
+        console.log(typeof prenom);
+        console.log(prenom.civilite);
+
+        prenom = 'Jean';
+
+        console.log('papa' + ' ' + 'toto');
+        console.log(1 + 2);
+        console.log(nom + 1 + 2);
+        console.log('1' + 2 + 3);
+        console.log(`l'interpolation de texte ou un literal template : ${nom} ${1 + 2}`);
+
+        /**
+         * JS est un langage prototypé
+        */
+
+        let tab = ['tata', 'toto'];
+        console.log(tab);
+        console.log(typeof tab);
+        let nombre = 12;
+        console.log(typeof(nombre.toString()));
+        let nbToString = nombre.toString();
+        console.log(typeof nbToString);
+        console.log(nbToString.length);
+        
+        /* les constantes */
+        function foo(paysServeur, typeHote, travail){
+            /* code de la fonction */
+        }
+
+        const SERVERFR = 1;
+        const SERVEREN = 2;
+        const SERVERUS = 3;
+        const HOSTFREE = 1;
+        const HOSTSUB = 2;
+        const ACTIONADD = 1;
+        const ACTIONMOD = 2;
+
+        foo(SERVEREN, HOSTSUB, ACTIONMOD);
+
+        /**
+         * JS est un langage non typé
+         * les variables se typent selon leur contenu
+         * 
+         * Types
+         * [primitif]
+         * number       -> nombre( entier, à virgule flottant)
+         * bool         -> Booléen
+         * 
+         * [référence]
+         * String       -> chaîne cde caractères
+         * Array        -> tableau
+         * Object       -> objet
+         * JSON         -> JavaScript Object Notation
+         * 
+        */
+
+        /* Opérateurs */
+
+        /**
+         * Mathématiques
+         * 
+         * + (sers aussi à la concaténation des chaînes de caractère)
+         * -
+         * /
+         * %
+         * *
+         * ** (remplace Math.pow())
+         * Math.pow(2,3)
+         * 2**3
+         * 
+         * Incrémentation / décrémentation
+         * 
+         * ++ variable++ <=> variable = variable + 1
+         * -- variable-- <=> variable = variable - 1
+         * 
+         * variable++ et ++variable
+         * 
+        */
+
+        let nombreIncrement = 11;
+        nombreIncrement++;
+        console.log(nombreIncrement);   //affiche 12
+        console.log(nombreIncrement++); //affiche 12 puis incrémente à 13
+        console.log(++nombreIncrement); //incrémente à 14 puis affiche 14
+
+        /**
+         * Logiques
+         * && (ET)
+         * || (OU)
+         * ! (NON)
+         * a = true, !a => non vrai donc false
+         * ^ (OU EXCLUSIF ou XOR)
+         * a = true;
+         * b = true;
+         * 
+         * a ^ b    => si a et !b   => true
+         *          => si !a et b   => true
+         *          => si !a et !b  => false
+         *          => si a et b    => false
+         * 
+         * Comparaison
+         * 
+         * <  >  <=  >=
+         * 
+         * == !=    => comparatif de valeur                 '2' == 2    => true     (même valeur mais pas le même type)
+         * === !==  => comparatif strict, valeur ET type    '2' === 2   => false    (même valeur mais pas le même type)
+         *                                                  2 === 2     => true     (même valeur ET même type)
+         * 
+        */
+
+        /* yoda code */
+
+        /*
+        //en Java
+        String a = "Chaîne";
+        a.equal("Chaîne"); // retourne vrai
+
+        String b = null;
+        b.equal("Chaîne") // retourne une erreur de type NullPointerException
+
+        // en yoda code
+        "Chaîne".equal(b); // retourne false
+        
+        */
+
+        
+    </script>
+</head>
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container">
