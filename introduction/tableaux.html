@@ -84,8 +84,90 @@
             cpt++;
         }while(cpt < cars.length)
 
-        /*   */
+        /* la méthode forEach()  */
+        console.log('------------- forEach() -----------------');
+        cars.forEach(function(value, index, cars){
+            console.log(` la valeur ${value} se trouve à l'index ${index} du tableau : ${cars}`);
+        });
 
+        let tabNumber = [1,2,3,4,5];
+        tabNumber.forEach(function(value, index, tab){
+            tab[index] = value*10;
+        });
+        console.log(tabNumber);
+
+        /* 
+        es6 .entries() 
+        elle vient du modèle objet, elle permet d'extraire chaque élément du tableau sous la forme d'un tableau contenant deux éléménts :
+        l'index et la valeur
+        */
+        console.log('---------- méthode .entries() -----------');
+        for(let entry of cars.entries()){
+            console.log(entry);
+            console.log(entry[0]);
+            console.log(entry[1]);
+        }
+
+        /* la méthode .map() est l'équivalent d'un forEach mais uniquement pour les tableau */
+        cars.map(function(value, index, tab){
+            console.log(` la valeur ${value} se trouve à l'index ${index} du tableau : ${tab}`);
+        });
+
+        console.log('---------- méthode .keys() -----------');
+        for(let key of cars.keys()){
+            console.log(key);
+            console.log(cars[key]);
+        }
+
+        /* ajouter des éléments dans un tableau */
+
+        cars[cars.length] = 'Hyundai'; /* ça marche mais non merci */
+
+        cars.push('Seat');
+        cars.push('Fiat', 'Toyota');
+
+        console.log(cars);
+
+        /* supprimer des valeurs dans un tableau */
+        /*
+        .pop()
+        .shift()
+        .splice()
+        */
+
+        /*  .pop() : extrait la dernière valeur d'un tableau */
+        let extractlast = cars.pop();
+        console.log(cars);
+        console.log(extractlast);
+
+        /* .shift() : extrait la première valeur du tableau et décale toutes les valeurs sur l'index */
+        let extractFirst = cars.shift();
+        console.log(cars);
+        console.log(extractFirst);
+
+        /* .splice() 1 : extraire des valeurs du tableau sous forme d'un tableau*/
+        let tabRemoved = cars.splice(cars.indexOf('Ford'), 2);
+        console.log(cars);
+        console.log(tabRemoved);
+
+        /* .splice() 2 : remplacer des valeurs extraite du tableau sous forme d'un tableau par d'autres valeurs (1 à X valeurs) */
+        let tabReplaced = cars.splice(cars.indexOf('Citroën'), 2, 'Alpine', 'Mazda');
+        console.log(cars);
+        console.log(tabReplaced);
+
+        /* .splice() 3 : inserrer des valeurs dans le tableau */
+        cars.splice(cars.indexOf('Mazda'), 0, extractFirst, extractlast, tabRemoved[0], tabRemoved[1], tabReplaced[0], tabReplaced[1]);
+        console.log(cars);
+
+        /* comment copier un tableau */
+
+        /*
+        let cloneCars = cars;
+        console.log(cloneCars);
+        cloneCars.pop();
+        console.log(cloneCars);
+        console.log(cars);
+        */
 
     </script>
 </head>
