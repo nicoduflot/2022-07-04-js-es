@@ -8,7 +8,80 @@
     <link rel="stylesheet" href="../css/bootstrap.css" media="all" />
     <script src="../js/bootstrap.bundle.js"></script>
     <script>
-        
+        /* avant es6 */
+        /*
+        var tableau = new Array('valeur', 1, 12.3, true);
+        console.log(tableau);
+        */
+
+        /* depuis es6 */
+        let cars = ['Peugeot', 'Citroën', 'Ford', 'Renault'];
+        console.log(cars);
+        console.table(cars);
+        console.log(cars[1]);
+        console.log(`le tableau cars : ${cars} contient ${cars.length} élément(s)`);
+
+        /* les tableaux sont donc des objet itérables */
+        /* on utilise généralement des boucles pour parcourir les tableaux */
+        /* la boucle pour */
+
+        console.log('------------------- boucle for -------------------');
+        for(let i = 0; i < cars.length; i++){
+            console.log(`la valeur à l'index ${i} contient ${cars[i]}`);
+        }
+
+        console.log('------------------- boucle for in ----------------');
+        for(let index in cars){
+            console.log(`la valeur à l'index ${index} contient ${cars[index]}`);
+        }
+
+        /* le for in permet aussi d'itérer sur les attributs et les méthodes d'un objet */
+        let obj = {
+            nom: 'Duflot',
+            prenom: 'Nicolas',
+            age: 42,
+            presentation: function(){
+                return `bonjour, je m'appelle ${this.prenom} ${this.nom} et j'ai ${this.age} ans`;
+            }
+        }
+
+        console.log(obj.presentation());
+
+        for(let key in obj){
+            console.log(`ce qui est contenu dans ${key} (${typeof obj[key]}) est ${obj[key]}`);
+        }
+
+        /* depuis es6 */
+
+        console.log('------------------- boucle for of (es6) ----------');
+        for(let value of cars){
+            console.log(`la valeur actuelle est ${value}`);
+        }
+
+        /* les boules tant que et faire tant que */
+        console.log('------------------- boucle while -----------------');
+        let cpt = 0;
+        while(cpt < cars.length){
+            console.log(cars[cpt]);
+            cpt++;
+        }
+
+        console.log('------------------- boucle do while --------------');
+        cpt = 0;
+        do{
+            console.log(cars[cpt]);
+            cpt++;
+        }while(cpt < cars.length)
+
+        do{
+            console.log(cars[cpt]);
+            if('Ford' === cars[cpt]){
+                break;
+            }
+            cpt++;
+        }while(cpt < cars.length)
+
+
     </script>
 </head>
 <body>
