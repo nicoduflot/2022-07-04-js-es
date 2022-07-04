@@ -169,6 +169,156 @@
         console.log(cars);
         */
 
+        /* .slice()  */
+        let cloneCars = cars.slice();
+        console.log(cloneCars);
+        cloneCars.pop();
+        console.log(cloneCars);
+        console.log(cars);
+
+        /* .sort() */
+        cloneCars.sort();
+        console.log(cloneCars);
+
+        /* .reverse() */
+        cloneCars.reverse();
+        console.log(cloneCars);
+
+        carsTest = [  ['Fiat', 1956], ['Kyia', 1995], ['Kyia', 1990], ['Ford', 1950] ];
+        console.log(carsTest);
+        carsTest.sort();
+        console.table(carsTest)
+
+        /* les tableaux à 2 voir 3 dimension n'existe pas vraiment en JS */
+        let tab2d = [ ['a', 'b', 'c'], [12,13,12,15,14], [10, 23, 56, 4] ];
+        console.log(tab2d);
+        /* afficher  */
+        console.log(tab2d[1][1]);
+        /* 
+        dans des langages compilé du type c++ ou java, les tableau à deux dimension sont réels et typés 
+        int tab[10] //un tableau en c++
+        int tab2d[5,5] // un tableau à 2 dimension d'entier, 5 lignes, 5 colonnes
+        */
+
+        /* créer une matrice devient un peu galère */
+        let matrice = [
+            [1,  2,  3,  4,  5 ],
+            [12, 14, 75, 56, 42]
+        ];
+
+        /* pour parcourir la matrice */
+        console.log('------ parcourir une "matrice" 2d avec for ------------');
+        for(let value of matrice){
+            for(let subValue of value){
+                console.log(subValue);
+            }
+        }
+
+        console.log('------ parcourir une "matrice" 2d avec .map() ------------');
+        matrice.map(function(value, index){
+            value.map(function(subValue, subIndex){
+                console.log(`x : ${index}, y: ${subIndex} => ${subValue}`);
+            });
+        });
+
+        /* retrouver une ou des valeurs dans un tableau */
+        /* .find() => retourne la première occurence qui corrspond à la recherche */
+        console.log('-------- .find() ----------------');
+        let arrayNum = [5, 8, 12, 130, 3, 44];
+
+        let found = arrayNum.find(function(element){
+            return 20 < element;
+            /*
+            if(20 < element){
+                return element;
+            }
+            */
+        });
+
+        console.log(found);
+
+        /* pour récupérer plusieurs éléments correspondants à la recherche, il faut utiliser .filter() */
+        let foundAll = arrayNum.filter(function(element){
+            return 11 < element;
+        });
+
+        console.log(foundAll);
+
+        /* utiliser l'opérateur arrow => pour simplifier l'écriture */
+        /*
+        function(){}
+        devient
+        ()=>{}
+
+        function(variable){}
+        devient
+        variable=>{}
+
+        function(){
+            return resultat;
+        }
+        devient
+        ()=>resultat
+
+        function(variable){
+            return variable;
+        }
+        devient
+        (variable)=>variable
+        */
+
+        console.log( 
+            arrayNum.filter((element)=>{
+                /* traitements variés sur élément */
+
+                /**********************************/
+
+                return 11 < element;
+            })
+        );
+
+        console.log(arrayNum.filter( (element)=> 11 < element ));
+
+        /* 
+        les fonction de rappel (callback functions) ou fonctions 
+        anonymes génèrent des conséquence quand elles sont trop imbriqués 
+        c'est à surveiller lors de l'utilisation du this d'un objet 
+        dans les méthodes de l'objet
+        */
+
+        console.log('----------- les conséquences -----------');
+        let monObjet = {
+            numbers: [1, 2, 56, 13, 123],
+            affTab: function(){
+                for(let i = 0; i < this.numbers.length; i++){
+                    console.log(`dans le for, this : ${this} et this.numbers[i]: ${this.numbers[i]}`);
+                }
+                let _this = this;
+
+                this.numbers.forEach(function(value){
+                    console.log(_this);
+                    console.log(this);
+                });
+
+                this.numbers.forEach( (value)=>{
+                    console.log(this);
+                });
+            }
+        };
+
+        monObjet.affTab();
+
+        /* 
+        créer un tableau avec des fruits et des légumes, avec deux fruits ou légumes en doublons 
+        modifier le tableau pour que : 
+            - les fruits et légumes soient triés par ordre alphabétiques
+            - que les doublons soient supprimés du tableau
+            - qu'on affiche un tableau des doublons et le nombre d'occurence de chaque doublons
+        */
+        
+        
+
+
     </script>
 </head>
 <body>
