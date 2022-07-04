@@ -315,9 +315,42 @@
             - que les doublons soient supprimés du tableau
             - qu'on affiche un tableau des doublons et le nombre d'occurence de chaque doublons
         */
-        
-        
 
+        let fruitEtLegumes = [
+            'fraise',
+            'bananes',
+            'mangue',
+            'choux',
+            'mangue',
+            'courgette',
+            'fraise',
+            'brocoli', 
+            'haricot',
+            'mangue'
+        ];
+        
+        console.log(fruitEtLegumes);
+        fruitEtLegumes.sort();
+        let tabTemp = [];
+        let tabDoublons = [];
+        fruitEtLegumes.forEach(function(value){
+            if(tabTemp[value] === undefined){
+                tabTemp[value] = 0;
+            }
+            tabTemp[value]++;
+        });
+
+        fruitEtLegumes.splice(0, fruitEtLegumes.length);
+        for(key in tabTemp){
+            fruitEtLegumes.push(key);
+            if(tabTemp[key] > 1){
+                tabDoublons.push([key, tabTemp[key]]);
+            }
+        }
+
+        console.log(tabTemp);
+        console.log(tabDoublons);
+        console.log(fruitEtLegumes);
 
     </script>
 </head>

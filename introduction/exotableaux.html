@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /* 
+        créer un tableau avec des fruits et des légumes, avec deux fruits ou légumes en doublons 
+        modifier le tableau pour que : 
+            - les fruits et légumes soient triés par ordre alphabétiques
+            - que les doublons soient supprimés du tableau
+            - qu'on affiche un tableau des doublons et le nombre d'occurence de chaque doublons
+        */
+
+        let fruitEtLegumes = [
+            'fraise',
+            'bananes',
+            'mangue',
+            'choux',
+            'mangue',
+            'courgette',
+            'fraise',
+            'brocoli', 
+            'haricot',
+            'mangue'
+        ];
+        
+        console.log(fruitEtLegumes);
+        fruitEtLegumes.sort();
+        let tabTemp = [];
+        let tabDoublons = [];
+        fruitEtLegumes.forEach(function(value){
+            if(tabTemp[value] === undefined){
+                tabTemp[value] = 0;
+            }
+            tabTemp[value]++;
+        });
+
+        fruitEtLegumes.splice(0, fruitEtLegumes.length);
+        for(key in tabTemp){
+            fruitEtLegumes.push(key);
+            if(tabTemp[key] > 1){
+                tabDoublons.push([key, tabTemp[key]]);
+            }
+        }
+
+        console.log(tabTemp);
+        console.log(tabDoublons);
+        console.log(fruitEtLegumes);
+
+        let tabTest = [];
+        console.log(tabTest);
+        tabTest['fraise'] = 1;
+        tabTest['mangue'] = 1;
+        console.log(tabTest);
+        tabTest['fraise']++;
+        console.log(tabTest);
+
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
