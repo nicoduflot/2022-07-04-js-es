@@ -32,10 +32,13 @@
         let tabTemp = [];
         let tabDoublons = [];
         fruitEtLegumes.forEach(function(value){
+            /*
             if(tabTemp[value] === undefined){
                 tabTemp[value] = 0;
             }
             tabTemp[value]++;
+            */
+            tabTemp[value] = (tabTemp[value] === undefined)? 0 : tabTemp[value]++;
         });
 
         fruitEtLegumes.splice(0, fruitEtLegumes.length);
