@@ -130,6 +130,7 @@
         /* créer le cookie qui expire à dateNow */
         /*
         document.cookie = `monCookie=${cookieValue}; expires=${dateNow.toUTCString()}; SameSite=Strict; Secure`;
+        document.cookie = `monCookie=${cookieValue}; max-age=${1 * 24 * 60 * 60}; SameSite=Strict; Secure`;
         */
         console.log(document.cookie);
 
