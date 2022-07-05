@@ -8,6 +8,66 @@
     <link rel="stylesheet" href="../css/bootstrap.css" media="all" />
     <script src="../js/bootstrap.bundle.js"></script>
     <script>
+        /*
+        il existe  deux types de fonction : les fonctions et les méthodes : 
+            - les méthodes sont des fonctions déclarées et utilisées via : 
+                - des instances de classe (objets créés par cette classe)
+                - la classe directement quand cette méthode est statique dans la classe
+            - les fonctions sont déclarées dans le programme ou dans un script.
+                Elle sont utilisable directement sans passer par des objets
+
+        de base, on utilise le mot clef function, puis le nom de la fonction, des parenthèse pour les paramètres (qu'il y en ait ou non)
+        enfin des acolades dans lequelles on a le code de la fonction
+
+        Les fonctions peuvent retourner un résultat ou directement agir sans retour vers l'appel de la fonction.
+        
+        fonction "simple" (sans paramètres d'appel) 
+        */
+
+        function helloWorld(){
+            return 'hello world !';
+        }
+
+        console.log(helloWorld());
+
+        /* 
+        fonction avec des variables en paramètres 
+        l'écriture @param permet de définir à l'utilisateur de la fonction
+        le type des arguments nécessaire
+        */
+        /**
+         * @param {string} prenom - The string
+         * @param {string} nom - The string
+         * @param {number} age - The number
+        */
+        function helloYou(prenom, nom, age){
+            return `Hello ${prenom} ${nom}, looking good for a ${age} years old ;)`;
+        }
+
+        console.log(helloYou('Nicolas', 'Duflot', 42));
+
+        /*
+        quand on fait :
+        tableau.push('a', 'b', 'c');
+
+        les paramètres 'a', 'b', 'c' entrés dans la fonctions push sont iterprèté par la fonction sous la forme
+        ['a', 'b', 'c']
+        
+        cela veut que push admet un seul paramètre, qui s'appelle un opérateur variadique ou Rest Parameter en anglais
+        il s'écrit ainsi à la déclaration dans les paramètre de la fonction
+
+        function maFonction(...valeurs){
+            valeurs.forEach(function(element){
+                //code
+            });
+        }
+
+        */
+
+        /* 
+        créer une fonction addition qui reçoit X paramètres et qui renvoit le résultat
+        */
+        
         
     </script>
 </head>
