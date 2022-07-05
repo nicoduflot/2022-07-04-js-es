@@ -15,7 +15,8 @@ function qSAll(selector){
 
 /* création d'une fonction d'initialisation / destruction de cookie */
 function setCookie(name, value = '', days = -1){
-    
+    let maxAge = days * 24 * 60 * 60;
+    document.cookie = `${name}=${value}; max-age=${maxAge}; SameSite=Strict; Secure`;
 }
 
 /* récupération d'un cookie */
