@@ -77,6 +77,68 @@
         }
 
         console.log(addition(1,3, 54, -12.5, '16.75', 'toto'));
+
+        /*
+        la structure de test try - catch permet de tester l'éxécution d'une fonction ou de code,
+        si cela fonction on sort du try après avoir éxécuté son code, si dans le try un erreur est relevé, 
+        elle est envoyée dans le catch, il faut donc la récupérer dans une variable qui est ensuite 
+        affichable
+        */
+
+        function testTryCatch(nom, prenom, age){
+            if(18 < age){
+                let res = 'personne mineure';
+            }else if(18 >= age){
+                let res = 'personne majeure';
+            }
+            return res;
+        }
+
+        try{
+            console.log(testTryCatch('Duflot', 'Nicolas', 42));
+        } catch(error){
+            console.error(`Il y a une erreur : ${error}`);
+        }
+
+        /* fonction anonyme ou fonction rappel (callback function) */
+        let maFonctionAnonyme = (name = null)=>{
+            if(null === name){
+                return 'Hello Kitty';
+            }else{
+                return `Hello ${name}`
+            }
+        }
+
+        console.log(maFonctionAnonyme('nicolas'));
+        console.log(maFonctionAnonyme());
+
+        /* 
+        fonction auto-éxécutable :
+
+        il est quand même possible de lancer une fonction anonyme 
+        sans avoir à l'assigner à une variable ou l'utiliser dans 
+        une fonction qui demande une fonction de rappel 
+
+        (
+            function(name){
+                //code fonction
+            }
+        )(
+            'Nicolas'
+        )
+        */
+
+        (
+            (name = null)=>{
+                if(null === name){
+                    console.log('auto Hello Kitty');
+                }else{
+                    console.log(`auto Hello ${name}`);
+                }
+            }
+        )(
+            'nicolas'
+        );
         
         
     </script>
