@@ -62,11 +62,21 @@
             });
         }
 
-        */
+        /!\ ATTENTION /!\
+        L'opérateur variadique doit ABSOLUMENT être déclaré en tant que dernier paramètre.
 
-        /* 
         créer une fonction addition qui reçoit X paramètres et qui renvoit le résultat
         */
+
+        function addition(...valeurs){
+            let resultat = 0;
+            for(value of valeurs){
+                resultat += (parseFloat(value))? parseFloat(value) : 0;
+            }
+            return resultat;
+        }
+
+        console.log(addition(1,3, 54, -12.5, '16.75', 'toto'));
         
         
     </script>
