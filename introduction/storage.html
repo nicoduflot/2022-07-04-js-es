@@ -7,6 +7,7 @@
     <title>Formation JS - ES - 2022-07-04</title>
     <link rel="stylesheet" href="../css/bootstrap.css" media="all" />
     <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/utilities.js"></script>
     <script>
         /* 
         sessionStorage 
@@ -17,7 +18,42 @@
         un onglet différent, la session est renouvelée
         */
 
+        console.log(sessionStorage);
+        /*
+        sessionUser
+        btnSession
+        btnClearSessionItem
+        btnClearSession
+        dataSession
+        */
+
+        /* il faut guetter le chargement complet de la page avant d'agir dessus */
+        console.log('début du chargement');
+        loaded((event)=>{
+            let inputSessionUser = qS('#sessionUser');
+            let btnSession = qS('#btnSession');
+            let btnClearSessionItem = qS('#btnClearSessionItem');
+            let btnClearSession = qS('#btnClearSession');
+            let dataSession = qS('#dataSession');
+            
+            if(sessionStorage.getItem('sessionUserName')){
+                dataSession.innerHTML = `<b>${sessionStorage.getItem('sessionUserName')}</b>`;
+            }else{
+                dataSession.innerHTML = `<b>Pas de sessionUserName d'enregistré</b>`;
+            }
+
+            btnSession.addEventListener('click', ()=>{
+                if('' !== inputSessionUser.value){
+                    console.log('top');
+                    sessionStorage.setItem('sessionUserName', inputSessionUser.value);
+                }
+            });
+
+        });
+      
+
         
+
     </script>
 </head>
 <body>
@@ -144,5 +180,7 @@
         </section>
     </main>
 </body>
-
+<script>
+    console.log('fin du chargement de la page');
+</script>
 </html>
