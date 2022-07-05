@@ -19,17 +19,19 @@
         */
 
         console.log(sessionStorage);
-        /*
-        sessionUser
-        btnSession
-        btnClearSessionItem
-        btnClearSession
-        dataSession
-        */
-
+        console.log(localStorage);
+        
         /* il faut guetter le chargement complet de la page avant d'agir dessus */
         console.log('début du chargement');
         loaded((event)=>{
+            /*
+            sessionUser
+            btnSession
+            btnClearSessionItem
+            btnClearSession
+            dataSession
+            */
+            
             let inputSessionUser = qS('#sessionUser');
             let btnSession = qS('#btnSession');
             let btnClearSessionItem = qS('#btnClearSessionItem');
@@ -44,13 +46,102 @@
 
             btnSession.addEventListener('click', ()=>{
                 if('' !== inputSessionUser.value){
-                    console.log('top');
                     sessionStorage.setItem('sessionUserName', inputSessionUser.value);
+                    dataSession.innerHTML = `<b>${sessionStorage.getItem('sessionUserName')}</b>`;
                 }
             });
 
+            btnClearSessionItem.addEventListener('click', ()=>{
+                sessionStorage.removeItem('sessionUserName');
+                dataSession.innerHTML = `<b>Pas de sessionUserName d'enregistré</b>`;
+            });
+
+            btnClearSession.addEventListener('click', ()=>{
+                sessionStorage.clear();
+                dataSession.innerHTML = `<b>Session vidée de tout ses éléments</b>`;
+            });
+
+            /*
+            localUser
+            btnLocal
+            btnClearLocalItem
+            btnClearLocal
+            dataLocal
+            */
+
+            let inputLocalUser = qS('#localUser');
+            let btnLocal = qS('#btnLocal');
+            let btnClearLocalItem = qS('#btnClearLocalItem');
+            let btnClearLocal = qS('#btnClearLocal');
+            let dataLocal = qS('#dataLocal');
+            
+            if(localStorage.getItem('localUserName')){
+                dataLocal.innerHTML = `<b>${localStorage.getItem('localUserName')}</b>`;
+            }else{
+                dataLocal.innerHTML = `<b>Pas de localUserName d'enregistré</b>`;
+            }
+
+            btnLocal.addEventListener('click', ()=>{
+                if('' !== inputLocalUser.value){
+                    localStorage.setItem('localUserName', inputLocalUser.value);
+                    dataLocal.innerHTML = `<b>${localStorage.getItem('localUserName')}</b>`;
+                }
+            });
+
+            btnClearLocalItem.addEventListener('click', ()=>{
+                localStorage.removeItem('localUserName');
+                dataLocal.innerHTML = `<b>Pas de localUserName d'enregistré</b>`;
+            });
+
+            btnClearLocal.addEventListener('click', ()=>{
+                localStorage.clear();
+                dataLocal.innerHTML = `<b>Local vidée de tout ses éléments</b>`;
+            });
+            
+
+
         });
       
+        /*
+        cookieValue
+        btnCookieValue
+        btnEmptyCookieValue
+        btnClearCookie
+        dataCookieValue
+        */
+        
+        /*
+        pour créer un cookie, on va directement écrire le cookie, savelur, sa date d'expiration, le niveau de samesite et la securité dans 
+        la liste des cookie : document.cookie
+        */
+
+        let cookieValue = 'Nico';
+        /* créer la date d'expiration */
+        let dateNow = new Date();
+        console.log(dateNow);
+        console.log(dateNow.toUTCString());
+        console.log(dateNow.getFullYear());
+        console.log(dateNow.getTime()); /* retourne le nombre de milliseconde écoulées depuis le 1er Jan 1970 00h00 à la date indiquée */
+        console.log(dateNow.getTime()+ (1 * 24 * 60 * 60 * 1000));
+
+        dateNow.setTime( dateNow.getTime()+ (1 * 26 * 60 * 60 * 1000) );
+        console.log(dateNow);
+
+        /* créer le cookie qui expire à dateNow */
+        /*
+        document.cookie = `monCookie=${cookieValue}; expires=${dateNow.toUTCString()}; SameSite=Strict; Secure`;
+        */
+        console.log(document.cookie);
+
+        /* 
+        comment supprimer un cookie ? 
+        il suffit de "l'ajouter" à nouveau dans document.cookie 
+        à l'identique sauf pour la date d'expiration qui doit être antérieure à la date actuel
+        */
+        /*
+        let anteDateNow = new Date();
+        document.cookie = `monCookie=${cookieValue}; expires=${anteDateNow.toUTCString()}; SameSite=Strict; Secure`;
+        */
 
         
 
@@ -168,7 +259,7 @@
                         </button>
                     </p>
                     <p>
-                        <button id="btnClearCookieValue" class="btn btn-outline-danger">
+                        <button id="btnClearCookie" class="btn btn-outline-danger">
                             Supprimer cookieValue
                         </button>
                     </p>

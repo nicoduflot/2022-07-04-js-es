@@ -14,7 +14,9 @@ function qSAll(selector){
 }
 
 /* création d'une fonction d'initialisation / destruction de cookie */
-
+function setCookie(name, value = '', days = -1){
+    
+}
 
 /* récupération d'un cookie */
 
