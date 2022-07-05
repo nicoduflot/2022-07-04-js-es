@@ -113,6 +113,28 @@
         console.log(maFonctionAnonyme());
 
         /* 
+        démo sur pourquoi parfois anonyme parfois non avec forEach :  
+        forEach ne reconnais pas les fonctions non anonymes déclarées 
+        "avant" lui, en revanche, la fonction de callback en est capable
+        */
+        let tabTest = [1, 2, 3];
+
+        function logTab(data){
+            console.log(data);
+        }
+
+        /*
+        tabTest.forEach(logTab(value)); 
+        // ceci ne marche pas, logTab n'est même pas 
+        // reconnu par forEach, il l'appele "undefined", 
+        // elle est donc hors de sa portée
+        */
+
+        tabTest.forEach((value)=>{
+            logTab(value);
+        });
+
+        /* 
         fonction auto-éxécutable :
 
         il est quand même possible de lancer une fonction anonyme 
@@ -139,6 +161,8 @@
         )(
             'nicolas'
         );
+        
+        
         
         
     </script>
