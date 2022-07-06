@@ -84,12 +84,16 @@
                     let val = input.value;
                     input.value = '';
                     input.focus();
-
+                    //console.log(Array.from(list.children));
+                    if(Array.from(list.children).map( (value)=> value.textContent.toLowerCase()).includes(val.toLowerCase())){
+                        return;
+                    }
                     /* ajout dans la liste */
                     let li = cEO('li');
-                    console.log(li);
                     li.textContent = val;
-
+                    li.addEventListener('click', function(){
+                        this.remove();
+                    });
                     list.appendChild(li);
                 }
             }
@@ -98,8 +102,6 @@
             let input = qS('#item');
             let list = qS('#toDoList');
 
-            
-
             addItemBtn.addEventListener('click', addItemList);
             input.addEventListener('keyup', (event)=>{
                 if('Enter' === event.key){
@@ -107,7 +109,21 @@
                 }                
             });
 
-            
+            /* preventDefault */
+            let subForm = qS('button.preventDefault');
+            subForm.addEventListener('click', (event)=>{
+                console.log(event);
+                event.preventDefault();
+                /* effectuer les contrôle formulaires */
+                let nom = qS('input[name=nom]');
+                let prenom = qS('input[name=prenom]');
+                console.log(nom);
+                if('' !== prenom.value && '' !== nom.value){
+                    qS('#testPreventDefault').submit();
+                }
+                /* si tout est OK, on envoie le formulaire */
+            });
+
         });
     </script>
 </head>
@@ -240,7 +256,7 @@
                             </p>
                         </fieldset>
                         <p>
-                            <button type="submit" class="btn btn-success">
+                            <button type="submit" class="btn btn-success preventDefault">
                                 Soumettre le formulaire
                             </button>
                         </p>
