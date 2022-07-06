@@ -8,12 +8,37 @@
     <link rel="stylesheet" href="../css/bootstrap.css" media="all" />
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="../js/utilities.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
     <script>
-        loaded(()=>{
-            
+        loaded(() => {
+            var numSpan = 1;
+            let addSpan = qS('#addSpan');
+            let test = qS('#test');
+            addSpan.addEventListener('click', function () {
+                /* 
+                pour créer un élément on utilise la méthode de document .createElement(<nom de l'élément>);
+                    pour ajouter des attributs à cet éléments 
+                    element.setAttribute(<attribut a ajouter>, <valeur de l'attribut>) 
+                */
+                let testSpan = document.createElement('span');
+                testSpan.setAttribute('data-test', `span n° ${numSpan}`);
+
+                testSpan.setAttribute('class', `alert alert-success testSpan col-2`);
+                testSpan.setAttribute('role', `alert`);
+                let content = document.createTextNode(`Span n° ${numSpan}`);
+                testSpan.appendChild(content);
+                console.log(testSpan);
+                /* exercice abonner l'élément à un écouteur d'évènements */
+
+                /* créer une fonction plus simple pour créer des éléments */
+                test.appendChild(testSpan);
+
+                numSpan++;
+            });
         });
     </script>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container">
@@ -37,7 +62,8 @@
                             <li><a class="dropdown-item" href="../introduction/index.html">Premiers scripts</a></li>
                             <li><a class="dropdown-item" href="../introduction/tableaux.html">Les tableaux</a></li>
                             <li><a class="dropdown-item" href="../introduction/fonctions.html">Les fonctions</a></li>
-                            <li><a class="dropdown-item" href="../introduction/destructuration.html">La destructuration</a></li>
+                            <li><a class="dropdown-item" href="../introduction/destructuration.html">La
+                                    destructuration</a></li>
                             <li><a class="dropdown-item" href="../introduction/storage.html">Storage</a></li>
                         </ul>
                     </li>
@@ -64,14 +90,15 @@
                     <h2>Créer dans le DOM</h2>
                 </header>
                 <main>
-                    <p id="test">
-
-                    </p>
                     <p>
                         <button id="addSpan" class="btn btn-secondary">
                             Ajouter span testSpan
                         </button>
                     </p>
+                    <div class="row" id="test" style="min-height: 50px; margin:20px">
+
+                    </div>
+
                     <button id="btn" class="btn btn-outline-primary">
                         Ajouter un paragraphe
                     </button>
@@ -150,4 +177,5 @@
         </section>
     </main>
 </body>
+
 </html>
