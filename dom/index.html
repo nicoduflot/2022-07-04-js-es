@@ -68,6 +68,16 @@ Cible du clic : ${event.target}
             });
 
             /* mini exo : faire quand le pointeur de la souris sors de l'image */
+            imgOver.addEventListener('mouseleave', function(){
+                this.setAttribute('src', '../images/pip-boy-thumb-down.png');
+                this.setAttribute('alt', 'Pip boy sans bras droit');
+                this.parentNode.childNodes.forEach( (figureChild)=>{
+                    if('FIGCAPTION' === figureChild.nodeName){
+                        figureChild.innerHTML = 'Pip boy sans bras droit';
+                        console.log(`on survole ${this}`);
+                    }
+                });
+            });
 
         });
     </script>
