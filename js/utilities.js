@@ -30,3 +30,42 @@ function getCookie(name){
     }
     return false;
 }
+
+function toggleClass(elt, classT){
+    return elt.classList.toggle(classT);
+}
+
+/* fonction pour créer un élément dans le DOM avec plusieurs attributs */
+function cE(element, ...attributes){
+    /*
+    ...attributes est appelé ['', ''], ['', '']
+    ici, attributes est devient un tableau de tableaux
+    [['', ''], ['', '']]
+    */
+    let newElement = document.createElement(element);
+    attributes.forEach(function(tabAttr){
+        newElement.setAttribute(tabAttr[0], tabAttr[1])
+    });
+    return newElement;
+}
+
+function cE(element, ...attributes){
+    /*
+    ...attributes est appelé ['', ''], ['', '']
+    ici, attributes est devient un tableau de tableaux
+    [['', ''], ['', '']]
+    */
+    let newElement = document.createElement(element);
+    attributes.forEach(function(tabAttr){
+        newElement.setAttribute(tabAttr[0], tabAttr[1])
+    });
+    return newElement;
+}
+
+function cEO(element, attributes){
+    let newElement = document.createElement(element);
+    for(key in attributes){
+        newElement.setAttribute(key, attributes[key]);
+    }
+    return newElement;
+}

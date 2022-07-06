@@ -16,27 +16,68 @@
             let test = qS('#test');
             addSpan.addEventListener('click', function () {
                 /* 
-                pour créer un élément on utilise la méthode de document .createElement(<nom de l'élément>);
+                    pour créer un élément on utilise la méthode de document .createElement(<nom de l'élément>);
                     pour ajouter des attributs à cet éléments 
                     element.setAttribute(<attribut a ajouter>, <valeur de l'attribut>) 
                 */
+                /*
+                let testSpan = cE('span', ['data-test', `span n° ${numSpan}`], ['class', `alert alert-success testSpan col-2`], ['role', `alert`]);
+                */
+                let options = {
+                    'data-test': `span n° ${numSpan}`, 
+                    'class':`alert alert-success testSpan col-2`, 
+                    'role': `alert`
+                };
+                /* 
+                cet objet à besoin de la notation JSON car class par exemple est un mot réservé en JS 
+                */
+                let testSpan = cEO('div', options);
+                /*
                 let testSpan = document.createElement('span');
                 testSpan.setAttribute('data-test', `span n° ${numSpan}`);
-
                 testSpan.setAttribute('class', `alert alert-success testSpan col-2`);
                 testSpan.setAttribute('role', `alert`);
+                */
                 let content = document.createTextNode(`Span n° ${numSpan}`);
                 testSpan.appendChild(content);
-                testSpan.classList.add('testSpan');
-                console.log(testSpan);
+                testSpan.classList.add('test');
                 /* exercice abonner l'élément à un écouteur d'évènements */
                 /* au clic, on enlève la class test du testSpan cliqué */
+                testSpan.addEventListener('click', function(){
+                    /*
+                    if(this.classList.contains('test')){
+                       this.classList.remove('test'); 
+                    }else{
+                        this.classList.add('test'); 
+                    }
+                    */
+                    this.classList.toggle('test');
+                    /* toggleClass(this, 'test'); */
+                    /*
+                    this.remove();
+                    */
+                });
 
                 /* créer une fonction plus simple pour créer des éléments */
                 test.appendChild(testSpan);
 
+                let listSpan = qSAll('.testSpan');
+
                 numSpan++;
             });
+
+            // todo list
+            /*
+            les éléments de la liste seront renseignés dans l'input, sur la touche Entrée ou
+            un clic sur le bouton "ajouter", on ajoute l'élément à la liste, et on 
+            vide le champs de saisie.
+
+            dans la liste, un clic sur un élément de cette liste le supprime
+
+            on vérifiera si un élément renseigné n'est déjà pas dans la liste,
+            le cas échéant il ne sera pas ajouté en doublon
+
+            */
         });
     </script>
 </head>
