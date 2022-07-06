@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation JS - ES - 2022-07-04</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" media="all" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/utilities.js"></script>
+    <script>
+        loaded(()=>{
+            
+        });
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="./">Dawan JS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Introduction
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="../introduction/index.html">Premiers scripts</a></li>
+                            <li><a class="dropdown-item" href="../introduction/tableaux.html">Les tableaux</a></li>
+                            <li><a class="dropdown-item" href="../introduction/fonctions.html">Les fonctions</a></li>
+                            <li><a class="dropdown-item" href="../introduction/destructuration.html">La destructuration</a></li>
+                            <li><a class="dropdown-item" href="../introduction/storage.html">Storage</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Interactions DOM
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="../dom/index.html">Le DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/dom.html">Créer dans le DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/css.html">DOM et CSS</a></li>
+                            <li><a class="dropdown-item" href="../dom/dataset.html">Dataset</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="col-lg-12">
+                <header>
+                    <h2>Créer dans le DOM</h2>
+                </header>
+                <main>
+                    <p id="test">
+
+                    </p>
+                    <p>
+                        <button id="addSpan" class="btn btn-secondary">
+                            Ajouter span testSpan
+                        </button>
+                    </p>
+                    <button id="btn" class="btn btn-outline-primary">
+                        Ajouter un paragraphe
+                    </button>
+                </main>
+            </article>
+        </section>
+        <section>
+            <article class="col-lg-6">
+                <header>
+                    <h2>To do list</h2>
+                </header>
+                <main>
+                    <div class="wrapperToDo">
+                        <div id="createItemList">
+                            <h3>Éléments de la liste a renseigner</h3>
+                            <p>
+                                <input type="text" class="form-control" id="item" />
+                            </p>
+                            <p>
+                                <button id="addItemBtn" class="btn btn-secondary">
+                                    Ajouter
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </main>
+            </article>
+            <article class="col-lg-6">
+                <header>
+                    <h2>Ma liste</h2>
+                </header>
+                <main>
+                    <div id="list">
+                        <ul id="toDoList">
+
+                        </ul>
+                    </div>
+                </main>
+            </article>
+        </section>
+        <section class="row">
+            <article class="col-lg-6">
+                <header>
+                    <h2>PreventDefault()</h2>
+                </header>
+                <main>
+                    <p>
+                        Le PreventDefault permet d'arrêter le comportement
+                        automatique de certaines actions, notemment les submit de formulaires,
+                        mais aussi le comprtement normal d'un lien.
+                    </p>
+                    <form id="testPreventDefault" method="get" action="">
+                        <fieldset>
+                            <legend>Civilité</legend>
+                            <p>
+                                <label class="form-label">
+                                    Nom
+                                </label>
+                                <input type="text" class="form-control" name="nom" />
+                            </p>
+                            <p>
+                                <label class="form-label">
+                                    Prénom
+                                </label>
+                                <input type="text" class="form-control" name="prenom" />
+                            </p>
+                        </fieldset>
+                        <p>
+                            <button type="submit" class="btn btn-success">
+                                Soumettre le formulaire
+                            </button>
+                        </p>
+                    </form>
+                </main>
+            </article>
+        </section>
+    </main>
+</body>
+</html>
