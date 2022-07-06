@@ -18,6 +18,8 @@
         un onglet différent, la session est renouvelée
         */
 
+        console.log(document.cookie);
+
         console.log(sessionStorage);
         console.log(localStorage);
         
@@ -98,57 +100,90 @@
                 dataLocal.innerHTML = `<b>Local vidée de tout ses éléments</b>`;
             });
             
+            /*
+            cookieValue
+            btnCookieValue
+            btnEmptyCookieValue
+            btnClearCookie
+            dataCookieValue
+            */
+            
+            /*
+            pour créer un cookie, on va directement écrire le cookie, savelur, sa date d'expiration, le niveau de samesite et la securité dans 
+            la liste des cookie : document.cookie
+            */
 
+            /*let cookieValue = 'Nico';*/
+            /* créer la date d'expiration */
+            let dateNow = new Date();
+            console.log(dateNow);
+            console.log(dateNow.toUTCString());
+            console.log(dateNow.getFullYear());
+            console.log(dateNow.getTime()); /* retourne le nombre de milliseconde écoulées depuis le 1er Jan 1970 00h00 à la date indiquée */
+            console.log(dateNow.getTime()+ (1 * 24 * 60 * 60 * 1000));
+
+            dateNow.setTime( dateNow.getTime()+ (1 * 26 * 60 * 60 * 1000) );
+            console.log(dateNow);
+
+            /* créer le cookie qui expire à dateNow */
+            /*
+            document.cookie = `monCookie=${cookieValue}; expires=${dateNow.toUTCString()}; SameSite=Strict; Secure`;
+            document.cookie = `monCookie=${cookieValue}; max-age=${1 * 24 * 60 * 60}; SameSite=Strict; Secure`;
+            */
+            console.log(document.cookie);
+
+            /* 
+            comment supprimer un cookie ? 
+            il suffit de "l'ajouter" à nouveau dans document.cookie 
+            à l'identique sauf pour la date d'expiration qui doit être antérieure à la date actuel
+            */
+            /*
+            let anteDateNow = new Date();
+            document.cookie = `monCookie=${cookieValue}; expires=${anteDateNow.toUTCString()}; SameSite=Strict; Secure`;
+            */
+
+            /*
+            setCookie('Test', 'mon test', 2);
+            setCookie('Test', 'ton test', 2);
+            setCookie('Test');
+            */
+
+            /* manipulation du cookie */
+
+            /*
+            cookieValue
+            btnCookieValue
+            btnEmptyCookieValue
+            btnClearCookie
+            dataCookieValue
+            */
+
+            let cookieValue = qS('#cookieValue');
+            let btnCookieValue = qS('#btnCookieValue');
+            let btnEmptyCookieValue = qS('#btnEmptyCookieValue');
+            let btnClearCookie = qS('#btnClearCookie');
+            let dataCookieValue = qS('#dataCookieValue');
+
+            if(getCookie('monCookie')){
+                dataCookieValue.innerHTML = `<b>monCookie : ${getCookie('monCookie')}</b>`;
+            }else{
+                dataCookieValue.innerHTML = `<b>Pas de cookie 'monCookie' d'enregistré</b>`;
+            }
+
+            btnCookieValue.addEventListener('click', ()=>{
+                if(cookieValue.value !== ''){
+                    setCookie('monCookie', cookieValue.value, 1);
+                    dataCookieValue.innerHTML = `<b>monCookie : ${getCookie('monCookie')}</b>`;
+                    console.log(document.cookie);
+                }
+            });
+
+            /* vider le cookie monCookie */
+            
 
         });
       
-        /*
-        cookieValue
-        btnCookieValue
-        btnEmptyCookieValue
-        btnClearCookie
-        dataCookieValue
-        */
         
-        /*
-        pour créer un cookie, on va directement écrire le cookie, savelur, sa date d'expiration, le niveau de samesite et la securité dans 
-        la liste des cookie : document.cookie
-        */
-
-        let cookieValue = 'Nico';
-        /* créer la date d'expiration */
-        let dateNow = new Date();
-        console.log(dateNow);
-        console.log(dateNow.toUTCString());
-        console.log(dateNow.getFullYear());
-        console.log(dateNow.getTime()); /* retourne le nombre de milliseconde écoulées depuis le 1er Jan 1970 00h00 à la date indiquée */
-        console.log(dateNow.getTime()+ (1 * 24 * 60 * 60 * 1000));
-
-        dateNow.setTime( dateNow.getTime()+ (1 * 26 * 60 * 60 * 1000) );
-        console.log(dateNow);
-
-        /* créer le cookie qui expire à dateNow */
-        /*
-        document.cookie = `monCookie=${cookieValue}; expires=${dateNow.toUTCString()}; SameSite=Strict; Secure`;
-        document.cookie = `monCookie=${cookieValue}; max-age=${1 * 24 * 60 * 60}; SameSite=Strict; Secure`;
-        */
-        console.log(document.cookie);
-
-        /* 
-        comment supprimer un cookie ? 
-        il suffit de "l'ajouter" à nouveau dans document.cookie 
-        à l'identique sauf pour la date d'expiration qui doit être antérieure à la date actuel
-        */
-        /*
-        let anteDateNow = new Date();
-        document.cookie = `monCookie=${cookieValue}; expires=${anteDateNow.toUTCString()}; SameSite=Strict; Secure`;
-        */
-
-        /*
-        setCookie('Test', 'mon test', 2);
-        setCookie('Test', 'ton test', 2);
-        setCookie('Test');
-        */
 
     </script>
 </head>

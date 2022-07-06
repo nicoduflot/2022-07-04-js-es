@@ -20,4 +20,13 @@ function setCookie(name, value = '', days = -1){
 }
 
 /* récupération d'un cookie */
-
+function getCookie(name){
+    let tabCookies = document.cookie.split('; '); // userName, userNameOf
+    for(cookie of tabCookies){
+        let tabValue = cookie.split('=');
+        if(tabValue[0] === name){
+            return tabValue[1];
+        }
+    }
+    return false;
+}
