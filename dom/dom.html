@@ -78,6 +78,36 @@
             le cas échéant il ne sera pas ajouté en doublon
 
             */
+
+            function addItemList(){
+                if('' !== input.value){
+                    let val = input.value;
+                    input.value = '';
+                    input.focus();
+
+                    /* ajout dans la liste */
+                    let li = cEO('li');
+                    console.log(li);
+                    li.textContent = val;
+
+                    list.appendChild(li);
+                }
+            }
+
+            let addItemBtn = qS('#addItemBtn');
+            let input = qS('#item');
+            let list = qS('#toDoList');
+
+            
+
+            addItemBtn.addEventListener('click', addItemList);
+            input.addEventListener('keyup', (event)=>{
+                if('Enter' === event.key){
+                    addItemList();
+                }                
+            });
+
+            
         });
     </script>
 </head>
