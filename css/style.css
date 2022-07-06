@@ -5,3 +5,25 @@
 .test{
     font-weight: bold;
 }
+
+#carre{
+    width: 100px;
+    height: 100px;
+    background-color: orange;
+    margin: 20px auto;
+    transition: transform 1s;
+}
+
+.left{
+    transform: translateX( calc( ( -1 * ( ( 100vw/2 ) -100px ) ) ) );
+}
+
+.right{
+    transform: translateX( calc( 100vw/2 - 100px ) );
+}
+
+
+
+.paragraphe-vert{
+    color: #aacc00;
+}
