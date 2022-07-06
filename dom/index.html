@@ -10,6 +10,64 @@
     <script src="../js/utilities.js"></script>
     <script>
         loaded(()=>{
+            console.log(document);
+            let mainArticle = qS('body > main > section > article > main');
+            console.log(mainArticle);
+            console.log(mainArticle.baseURI);
+            console.log(mainArticle.childNodes);
+            /*
+            mainArticle.childNodes.forEach( (noeudEnfant) => {
+                console.log(noeudEnfant);
+            });
+            */
+            let headerArticle = qSAll('.titreDeChapitre');
+            console.log(headerArticle);
+            headerArticle.forEach( (title, key, tab)=>{
+                title.addEventListener('click', ()=>{
+                    console.log(`
+title.innerText : ${title.innerText},
+key             : ${key}
+tab             : ${tab}
+title.nodeName  : ${title.nodeName}
+                    `);
+                });
+            });
+
+            qS('body').addEventListener('click', (event)=>{
+                qS('#ouEstLeCLic').innerHTML = `
+Coordonnées du clic : 
+X : ${event.clientX} 
+Y : ${event.clientY} <br />
+Cible du clic : ${event.target}
+                `;
+            });
+
+            let allP = qSAll('p:not(p#special)');
+            console.log(allP);
+
+            allP.forEach((paragraphe)=>{
+                paragraphe.addEventListener('click', function(){
+                    qS('#showP').innerText = this.innerHTML;
+                    paragraphe.childNodes.forEach((value)=>{
+                        console.log(this);
+                    });
+                });
+            });
+
+            let imgOver = qS('#imgOver');
+
+            imgOver.addEventListener('mouseover', function(){
+                this.setAttribute('src', '../images/pip-boy-thumb-up.png');
+                this.setAttribute('alt', 'Pip boy avec bras droit');
+                this.parentNode.childNodes.forEach( (figureChild)=>{
+                    if('FIGCAPTION' === figureChild.nodeName){
+                        figureChild.innerHTML = 'Pip boy avec bras droit';
+                        console.log(`on survole ${this}`);
+                    }
+                });
+            });
+
+            /* mini exo : faire quand le pointeur de la souris sors de l'image */
 
         });
     </script>
@@ -74,9 +132,9 @@
                         On écoute l'évènement de la fenêtre DOMContentLoaded qui survient
                         quand la page est totalement chargée.
                     </p>
-                    <p>
-                        <button class="btn btn-outline-primary btn-sm testez-moi">Testez-moi</button>
-                    </p>
+                    <div id="ouEstLeCLic">
+
+                    </div>
                     <h3 class="titreDeChapitre">Agir sur le DOM</h3>
                     <ul>
                         <li>Connaître l'élément surveillé l'élément du DOM, de la page</li>
@@ -87,7 +145,7 @@
                             Tester les paragraphes
                         </button>
                     </p>
-                    <div id="showP">
+                    <div id="showP" style="border: 1px solid lightseagreen; border-radius: 5px;">
                         
                     </div>
                     <p id="special">
