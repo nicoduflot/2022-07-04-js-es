@@ -27,8 +27,10 @@
                 testSpan.setAttribute('role', `alert`);
                 let content = document.createTextNode(`Span n° ${numSpan}`);
                 testSpan.appendChild(content);
+                testSpan.classList.add('testSpan');
                 console.log(testSpan);
                 /* exercice abonner l'élément à un écouteur d'évènements */
+                /* au clic, on enlève la class test du testSpan cliqué */
 
                 /* créer une fonction plus simple pour créer des éléments */
                 test.appendChild(testSpan);
