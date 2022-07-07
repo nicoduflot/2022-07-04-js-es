@@ -15,14 +15,12 @@
 }
 
 .left{
-    transform: translateX( calc( ( -1 * ( ( 100vw/2 ) -100px ) ) ) );
+    transform: translateX( calc( (100vw/2 - 100px)*-1 ) );
 }
 
 .right{
     transform: translateX( calc( 100vw/2 - 100px ) );
 }
-
-
 
 .paragraphe-vert{
     color: #aacc00;

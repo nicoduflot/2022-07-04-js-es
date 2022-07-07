@@ -69,3 +69,12 @@ function cEO(element, attributes = {}){
     }
     return newElement;
 }
+
+/* création d'un objet pour se connecter à des ressources via des requêtes AJAX */
+function getXhr(){
+    let xhr = null;
+    /*
+    XHR : XML HTTP Request
+    */
+    
+}
