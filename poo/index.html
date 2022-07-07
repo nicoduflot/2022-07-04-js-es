@@ -11,6 +11,56 @@
     <link rel="stylesheet" href="../css/style.css" />
     <script>
         loaded(() => {
+            /*
+             Avant es6, on pouvait créer un objet depuis un prototype, mais sans pouvoir le créer en class comme en php
+            */
+
+            /* 
+            un objet est issu d'un constructeur 
+            le construction est une fonction qui construit le squelette de l'objet
+            */
+
+            function Humain(nom, prenom, age){
+                this.nom = nom;
+                this.prenom = prenom;
+                this.age = age;
+                this.esperanceVie = parseInt(this.age) + Math.floor( Math.random()*20 );
+            }
+
+            /* mon Humain sait faire des chose, se sont ses méthodes */
+            /* il taper sur des animaux */
+
+            Humain.prototype.chasser = function(){
+                return `${this.prenom} TUER ANIMAL POUR MANGER !`;
+            };
+
+            Humain.prototype.dormir = function(){
+                this.esperanceVie = this.esperanceVie + (1/730);
+            }
+
+            /*
+            Tous les humains savent crier.
+            Si on ne précise pas qu'une méthode 
+            est prototype du constructeur de l'objet,
+            on crée l'équivalent d'une fonction static
+            */
+            Humain.crier = function(cri = ''){
+                return `${cri} RRRRRRRR !`;
+            };
+
+            console.log(Humain.crier());
+
+            /* création de mon premier humain */
+            let monHumain = new Humain('Uruk', 'Gronk', 20);
+
+            console.log(monHumain);
+            console.log(monHumain.chasser());
+            console.log(`Je suis ${monHumain.prenom}`);
+            console.log(monHumain.esperanceVie);
+            monHumain.dormir();
+            console.log(monHumain.esperanceVie);
+
+            
 
         });
     </script>
