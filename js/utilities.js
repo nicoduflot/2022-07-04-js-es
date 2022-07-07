@@ -76,5 +76,51 @@ function getXhr(){
     /*
     XHR : XML HTTP Request
     */
-    
+    /* vérifier si le navigateur supporte un des protocoles AJAX existants */
+    if( window.ActiveXObject || window.XMLHttpRequest ){
+        /* Est-ce que le navigateur nécéssite un protocole Microsoft */
+        if( window.ActiveXObject){
+            /* il existe deux protocoles microsoft */
+            try{
+                xhr = ActiveXObject('Msxml2.XMLHTTP');
+            } catch(e){
+                xhr = ActiveXObject('Microsoft.XMLHTTP');
+            }
+        }else{
+            xhr = new XMLHttpRequest();
+        }
+    }else{
+        console.log('Votre navigateur ne supporte pas les protocoles AJAX');
+        xhr = false;
+    }
+    return xhr;
+}
+
+function jsonToTableObject(data){
+    let thead = '<tr>';
+    let tbody = '';
+    let firstRound = true;
+    data.forEach( (dataL1)=>{
+        tbody = tbody + `<tr>`;
+        for(key in dataL1){
+            if(firstRound){
+                thead = thead + `<th>${key}</th>`
+            }
+            if('object' !== typeof dataL1[key]){
+                tbody = tbody + `<td>${dataL1[key]}</td>`;
+            }else{
+                tbody = tbody + `<td>`
+                for(item in dataL1[key]){
+                    if('object' !== typeof dataL1[key][item]){
+                        tbody = tbody + `<b>${item}</b> : ${dataL1[key][item]}<br />`;
+                    }
+                }
+                tbody = tbody + `</td>`;
+            }
+        }
+        tbody = tbody + `</tr>`;
+        firstRound = false;
+    } );
+    thead = thead + '</tr>';
+    return [thead, tbody];
 }

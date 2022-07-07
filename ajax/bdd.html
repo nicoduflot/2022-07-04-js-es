@@ -11,56 +11,30 @@
     <link rel="stylesheet" href="../css/style.css" />
     <script>
         loaded(() => {
-            /*
-            Pour faire de l'AJAX, on créer tout d'abord un objet xhr
-
-            Cet objet possède les méthodes et les attributs qui permettent 
-            la connexion à des ressources externe qui autorise la connexion et 
-            qui pourront répondre aux requêtes AJAX que l'on envoie.
-            */
             let xhr = getXhr();
-            let result = qS('#result');
+            xhr.responseType = 'json';
+            let resultThead = qS('#result thead');
+            let resultTbody = qS('#result tbody');
             console.log(xhr);
             let content = '';
             qSAll('button.read').forEach(btn => {
                 btn.addEventListener('click', function(){
-                    /* exemple en synchrone (le synchrone n'est pas activé par défaut en AJAX) */
-                    /*
-                    .open( 
-                        <verbe HTTP : GET pour demander des données, POST pour les envoyer >, 
-                        <url de la ressource appelée>,
-                        <asynchrone : à true par défaut, pour se connecter en synchrone doit être mis à false (optionnel)>,
-                        <login      : si la ressource demande une identification sécurisée (optionnel)>,
-                        <password   : si la ressource demande une identification sécurisée (optionnel)>)
-                    */
-                    /*
-                    xhr.open('GET', btn.dataset.url, false);
-                    xhr.send();
-                    result.innerHTML = xhr.responseText;
-                    */
                     xhr.onreadystatechange = ()=>{
-                        /*
-                        0 : unsent              -> .open() n'a pas encore été appelé
-                        1 : openned             -> .open() a été appelé
-                        2 : headers_received    -> les entêtes de la requête ont été reçus par la ressource
-                        3 : loading             -> la requête envoyé est en cours de traitement
-                        4 : done                -> le traitement de la requête est fini, la réponse est utilisable
-                        */
                         if(200 === xhr.status){
-                            result.innerHTML = xhr.responseText;
+                            let tabResult = jsonToTableObject(xhr.response);
+                            resultThead.innerHTML = tabResult[0];
+                            resultTbody.innerHTML = tabResult[1];
                         }
-                        /* gérer les erreurs */
                         if(200 !== xhr.status){
-                            content = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <b>${xhr.status} : ${xhr.statusText}</b>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>`;
-                            result.innerHTML = content;
+                            content = `<tr data-id="error" data-name="error" data-email="error">
+                            <div class="alert alert-danger alert-dismissible fade show" >
+                            <b style="color:darkred;">${xhr.status} : ${xhr.statusText}</b>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            </tr>`;
+                            resultTbody.innerHTML = content;
                         }
-                        
                     };
-                    
-                    /* envoyer la requête */
                     xhr.open('GET', btn.dataset.url);
                     xhr.send();
                 });
@@ -136,16 +110,21 @@
                 <main>
                     <h3>xhr : Xml Http Request</h3>
                     <p>
-                        <button class="btn btn-secondary btn-sm read" data-url="../resources/file.txt">
-                            Lire le fichier txt
+                        <button class="btn btn-secondary btn-sm read" data-url="https://jsonplaceholder.typicode.com/users">
+                            API REST jsonPlaceholder
                         </button>
-                        <button class="btn btn-secondary btn-sm read" data-url="../dada/resources/file.txt">
-                            Connexion à un mauvais fichier
+                        <button class="btn btn-secondary btn-sm read" data-url="../resources/bdd.json">
+                            Lire le fichier json local
                         </button>
                     </p>
-                    <div id="result">
+                    <table id="result" class="table table-striped">
+                        <thead class="table-dark">
+                            
+                        </thead>
+                        <tbody>
 
-                    </div>
+                        </tbody>
+                    </table>
                 </main>
             </article>
         </section>
