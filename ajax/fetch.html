@@ -11,75 +11,31 @@
     <link rel="stylesheet" href="../css/style.css" />
     <script>
         loaded(() => {
-            /*
-            Promise = créer une fonction asynchrone dont l'éxécution ne stoppe pas 
-            ou ne "fige" l'utilisation de la page
-
-            on appelle un fonction asynchrone
-            cette fonction va lancer une fonction qui est une promesse, 
-            cette promesse est qu'elle renvoi un résultat quoi que soit l'issue de sont traitement
-            La fonction asynchrone est en attente de réponse de la promesse qui prend du temps et 
-            qui pourrai figer la page
-
-            */
-            let result = qS('#result');
-
-            /* créer une fonction asynchrone */
-
-            async function asyncCall(){
-                let result = await resolveAfterXseconds(2);
-                return result;
-            }
-
-            /* 
-            la fonction appelée par la fonction asynchrone est une promesse 
-            une promesse ne renvoie que deux type de résultat
-            Soit la réussite du traitement      resolve()
-            Soit l'échec' du traitement         reject()
-            */
-
-            /* écriture de la promesse */
-            function resolveAfterXseconds(delay){
-                let randError = Math.floor(Math.random()*3 + 1);
-                
-                return new Promise( function(resolve, reject){
-                    /* traitement long de la fonction */
-                    setTimeout( function(){
-                        if(2 !== randError){
-                            /* si le traitement est réussie, on retourne alors le resolve */
-                            resolve('Le formateur aime les jeux de rôles');
-                        }else{
-                            /* si le traitement est en échec, on retourne alors le reject */
-                            reject( new Error(`L'information n'est pas disponible`) );
-                        }
-                    }, delay*1000);
-                });
-            }
-
-            /* maintenant on gère le bouton et l'appele de la fonction asyncCall */
-            let finAsync = '';
-            qS('#btn').addEventListener('click', function(){
-                asyncCall()
-                .then( (message)=>{
-                    console.log(`async : ${message}`);
-                    finAsync = finAsync + message;
-                    return finAsync;
-                })
-                .then( fin =>{
-                    finAsync = fin + ' youpi ';
-                })
-                .catch( (error)=>{
-                    console.log(`async : ${error}`);
-                    finAsync = finAsync + error;
-                })
-                .finally( () => {
-                    console.log('fin async');
-                    finAsync = finAsync + `<br />Fin de la promesse`;
-                    result.innerHTML = finAsync;
-                    finAsync = '';
+            let resultThead = qS('#result thead');
+            let resultTbody = qS('#result tbody');
+            let content = '';
+            qSAll('button.read').forEach(btn => {
+                btn.addEventListener('click', function(){
+                    fetch(this.dataset.url)
+                    .then( response => {
+                        return response.json();
+                    })
+                    .then( data => {
+                        let tabResult = jsonToTableObject(data);
+                        resultThead.innerHTML = tabResult[0];
+                        resultTbody.innerHTML = tabResult[1];
+                    })
+                    .catch( error => {
+                        resultTbody.innerHTML = `<td  class="alert alert-danger alert-dismissible fade show">
+                            <b style="color:darkred;">Erreur : ${error}</b>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </td>    `
+                    })
+                    .finally( ()=>{
+                        console.log('fin de la requête');
+                    })
                 });
             });
-
         });
     </script>
 </head>
@@ -145,21 +101,33 @@
             <article class="col-lg-12">
                 <header>
                     <h2>
-                        Les promesses (promise)
+                        AJAX - Fetch
                     </h2>
                 </header>
                 <main>
+                    <h3>xhr : Xml Http Request</h3>
                     <p>
-                        <button class="btn btn-secondary btn-sm" id="btn">
-                            Récupérer une info
+                        <button class="btn btn-secondary btn-sm read" data-url="../resources/users.json">
+                            Users.json
                         </button>
-                        <button class="btn btn-secondary btn-sm " id="btnTest">
-                            Afficher coucou en console
+                        <button class="btn btn-secondary btn-sm read" data-url="../resources/bdd.json">
+                            bdd.json
+                        </button> 
+                        <button class="btn btn-secondary btn-sm read" data-url="../resource/users.json">
+                            Users.json erreur
+                        </button>
+                        <button class="btn btn-secondary btn-sm read" data-url="../resource/bdd.json">
+                            bdd.json erreur
                         </button>
                     </p>
-                    <p id="result">
-                        
-                    </p>
+                    <table id="result" class="table table-striped">
+                        <thead class="table-dark">
+                            
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
                 </main>
             </article>
         </section>
