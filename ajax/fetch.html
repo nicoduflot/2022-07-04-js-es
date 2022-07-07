@@ -43,9 +43,15 @@
             let searchUser = qS('#searchUser');
             searchUser.addEventListener('keyup', function(){
                 let input = searchUser.value;
-                if(input.lenght >= 3){
+                if(input.length >= 3){
                     /* fetch */
-                    
+                    fetch('../resources/users.json')
+                    .then( response => response.json() )
+                    .then( data => {
+                        let tabResult = jsonResultSearch(data, input);
+                        resultThead.innerHTML = tabResult[0];
+                        resultTbody.innerHTML = tabResult[1];
+                    })
                     /* 
                     dans le fetch on appelle une fonction similaire à jsonToTableObject 
                     mais qui n'affichera que les lignes de tableau qui contiennent dans les 
@@ -53,6 +59,9 @@
                     jsonResultSearch(data, search)
                     data etant le json ressource, search ce qu'on récupère dans l'input
                     */
+                }else{
+                    resultThead.innerHTML = '';
+                    resultTbody.innerHTML = '';
                 }
             });
         });

@@ -106,14 +106,23 @@ function jsonToTableObject(data){
             if(firstRound){
                 thead = thead + `<th>${key}</th>`;
             }
+            /* si l'attribut qu'on récupère contient une donnée ou un objet */
             if('object' !== typeof dataL1[key]){
+                /* si ce n'est pas un objet, on l'affiche */
                 tbody = tbody + `<td data-info="${key}">${dataL1[key]}</td>`;
             }else{
+                /* si c'est un objet, on parcour ses attributs */
                 tbody = tbody + `<td data-info="${key}">`;
                 for(item in dataL1[key]){
+                    /* si l'attribut qu'on récupère contient une donnée ou un objet */
                     if('object' !== typeof dataL1[key][item]){
+                        /* si ce n'est pas un objet, on l'affiche */
                         tbody = tbody + `<b>${item}</b> : <i>${dataL1[key][item]}</i><br />`;
                     }
+                    /* 
+                    si c'est un objet, on ne l'affiche pas et on ne 
+                    le parcoure pas pour pas avoir de troisième niveau 
+                    */
                 }
                 tbody = tbody + `</td>`;
             }
@@ -126,6 +135,65 @@ function jsonToTableObject(data){
 }
 
 function jsonResultSearch(data, search){
-
-    return ['', ''];
+    search = search.toLowerCase();
+    let thead = '<tr>';
+    let tbody = '';
+    let tempLine = '';
+    let searchOK = false;
+    let firstRound = true;
+    let compare = '';
+    data.forEach((dataL1)=>{
+        tempLine = tempLine + `<tr>`;
+        for(key in dataL1){
+            if(firstRound){
+                thead = thead + `<th>${key}</th>`;
+            }
+            /* si l'attribut qu'on récupère contient une donnée ou un objet */
+            if('object' !== typeof dataL1[key]){
+                /* si ce n'est pas un objet, on l'affiche */
+                compare = dataL1[key].toString().toLowerCase();
+                if(compare.indexOf(search) >= 0){
+                    searchOK = true;
+                }
+                tempLine = tempLine + `<td data-info="${key}">`;
+                tempLine +=(compare.indexOf(search) >= 0)?'<mark>': '';
+                tempLine = tempLine + `${dataL1[key]}`;
+                tempLine += (compare.indexOf(search) >= 0)?'</mark>': '';
+                tempLine = tempLine + `</td>`;
+            }else{
+                /* si c'est un objet, on parcour ses attributs */
+                tempLine = tempLine + `<td data-info="${key}">`;
+                for(item in dataL1[key]){
+                    /* si l'attribut qu'on récupère contient une donnée ou un objet */
+                    if('object' !== typeof dataL1[key][item]){
+                        /* si ce n'est pas un objet, on l'affiche */
+                        compare = dataL1[key][item].toString().toLowerCase();
+                        if(compare.indexOf(search) >= 0){
+                            searchOK = true;
+                        }
+                        tempLine = tempLine + `<b>${item}</b> : <i>`;
+                        tempLine +=(compare.indexOf(search) >= 0)?'<mark>': '';
+                        tempLine = tempLine + `${dataL1[key][item]}`;
+                        tempLine +=(compare.indexOf(search) >= 0)?'</mark>': '';
+                        tempLine = tempLine + `</i><br />`;
+                    }
+                    /* 
+                    si c'est un objet, on ne l'affiche pas et on ne 
+                    le parcoure pas pour pas avoir de troisième niveau 
+                    */
+                }
+                tempLine = tempLine + `</td>`;
+            }
+        }
+        tempLine = tempLine + `</tr>`;
+        /* ne faire l'ajout de la ligne temporaire que si une des information qu'elle contient correspond à la recherche */
+        if(searchOK){
+            tbody = tbody + tempLine;
+        }
+        tempLine = '';
+        searchOK = false;
+        firstRound = false;
+    } );
+    thead = thead + '</tr>';
+    return [thead, tbody];
 }
