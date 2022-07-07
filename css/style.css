@@ -25,3 +25,8 @@
 .paragraphe-vert{
     color: #aacc00;
 }
+
+#zoomInfo{
+    height: 150px;
+    overflow: auto;
+}

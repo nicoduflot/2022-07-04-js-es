@@ -100,19 +100,19 @@ function jsonToTableObject(data){
     let thead = '<tr>';
     let tbody = '';
     let firstRound = true;
-    data.forEach( (dataL1)=>{
+    data.forEach((dataL1)=>{
         tbody = tbody + `<tr>`;
         for(key in dataL1){
             if(firstRound){
-                thead = thead + `<th>${key}</th>`
+                thead = thead + `<th>${key}</th>`;
             }
             if('object' !== typeof dataL1[key]){
-                tbody = tbody + `<td>${dataL1[key]}</td>`;
+                tbody = tbody + `<td data-info="${key}">${dataL1[key]}</td>`;
             }else{
-                tbody = tbody + `<td>`
+                tbody = tbody + `<td data-info="${key}">`;
                 for(item in dataL1[key]){
                     if('object' !== typeof dataL1[key][item]){
-                        tbody = tbody + `<b>${item}</b> : ${dataL1[key][item]}<br />`;
+                        tbody = tbody + `<b>${item}</b> : <i>${dataL1[key][item]}</i><br />`;
                     }
                 }
                 tbody = tbody + `</td>`;
