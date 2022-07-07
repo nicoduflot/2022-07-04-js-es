@@ -124,3 +124,8 @@ function jsonToTableObject(data){
     thead = thead + '</tr>';
     return [thead, tbody];
 }
+
+function jsonResultSearch(data, search){
+
+    return ['', ''];
+}
