@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="../css/style.css" />
     <script>
         loaded(() => {
+
+            /* fetch de base */
             let resultThead = qS('#result thead');
             let resultTbody = qS('#result tbody');
             let content = '';
@@ -35,6 +37,23 @@
                         console.log('fin de la requête');
                     })
                 });
+            });
+
+            /* suggestion / recherche utilisateurs */
+            let searchUser = qS('#searchUser');
+            searchUser.addEventListener('keyup', function(){
+                let input = searchUser.value;
+                if(input.lenght >= 3){
+                    /* fetch */
+
+                    /* 
+                    dans le fetch on appelle une fonction similaire à jsonToTableObject 
+                    mais qui n'affichera que les lignes de tableau qui contiennent dans les 
+                    td les INFORMATIONs (pas les entêtes de colonnes) 
+                    jsonResultSearch(data, search)
+                    data etant le json ressource, search ce qu'on récupère dans l'input
+                    */
+                }
             });
         });
     </script>
@@ -98,7 +117,7 @@
     </nav>
     <main class="container">
         <section class="row">
-            <article class="col-lg-12">
+            <article class="col-lg-8">
                 <header>
                     <h2>
                         AJAX - Fetch
@@ -128,6 +147,17 @@
 
                         </tbody>
                     </table>
+                </main>
+            </article>
+            <article class="col-lg-4">
+                <header>
+                    <h2>Suggestion utilisateurs</h2>
+                </header>
+                <main>
+                    <h3>Utilisateur dans users</h3>
+                    <p>
+                        <input type="text" id="searchUser" value="" class="form-control" />
+                    </p>
                 </main>
             </article>
         </section>
