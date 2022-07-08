@@ -11,120 +11,7 @@
     <link rel="stylesheet" href="../css/style.css" />
     <script>
         loaded(() => {
-            /* créons l'iterator sous forme d'un objet litéral */
-
-            let arrayCollection = {
-                /* 
-                quand on crée un iterator, une de ses propriété doit ABSOLUMENT être un tableau 
-                */
-                elements: [],
-                add(...valeurs){
-                    for(let value of valeurs){
-                        this.elements.push(value);
-                    }
-                    return this;
-                },
-                count(search){
-                    let cpt = 0;
-                    for(let value of this.elements){
-                        cpt += (value === search)? 1 : 0;
-                    }
-                    return cpt;
-                },
-                /*
-                pour pouvoir itérer sur un objet, il faut définir quel 
-                propriété de l'objet est l'attribut itérable.
-                On utilise les mot clef Symbol (es6) qui va permettre 
-                de créer des attributs et des méthodes uniques
-                */
-                [Symbol.iterator](){
-                    let index = 0;
-                    let elements = this.elements;
-                    return{
-                        next(){
-                            /*
-                            next est un générator, il renverra l'un après l'autre
-                            ce qu'il recevra, il attends des propriétés, value et done.
-                            value représente la valeur actuelle sur laquelle il itère
-                            done est un booléen, si faux, il refait ce que next() contient
-                            */
-                            return {
-                                value: elements[index++],
-                                done: elements.length < index
-                            }
-                        }
-                    }
-                }
-
-            };
-
-            arrayCollection.add('aria', 12, 'ok', 'aria', 'ok', 'ok', 'ok', 12);
-            console.log(arrayCollection);
-            for(let value of arrayCollection){
-                console.log(value);
-            }
-
-            console.log(`compter aria : ${arrayCollection.count('aria')}`);
-            console.log(`compter ok : ${arrayCollection.count('ok')}`);
-
-            /* 
-            Generator = fonction
-            ce type de fonction retourne plusieurs valeurs.
-            si on utilise return, lui ne retournera qu'une seule fois un résultat.
-            si je veux un emsemble de résultat (une "récolte"), 
-            on utilisera le mot-clef "yield" (rendre / récolter)
-            pour spécifier qu'une fonction est generator,
-            il faut utliser le caractère spécial * à la fin du mot function
-            lors de la déclaration 
-            */
-            function* valeurPaire(min, max){
-                for(let i = 0; i <= max; i++){
-                    if( 0 === (i % 2)){
-                        yield i;
-                    }
-                }
-            }
-
-            function returnPaire(min, max){
-                let result = [];
-                for(let i = 0; i <= max; i++){
-                    if( 0 === (i % 2)){
-                        result.push(i);
-                    }
-                }
-                return result;
-            }
-
-            console.log(valeurPaire(0, 10)); 
-            /* ne renvoie rien, est en attente d'utilisation, généralement être parcouru */
-
-            let tabPaire = [];
-            for(let value of valeurPaire(0, 10)){
-                console.log(value);
-                tabPaire.push(value*1.75);
-            }
-
-            console.log(tabPaire);
-
-            let testPaire = valeurPaire(0, 10);
-            console.log(testPaire);
-
-            for(let value of testPaire){
-                console.log(value);
-            }
-
-            console.log(returnPaire(0, 10));
-
-            function* xDy(nbD, nbFacesD){
-                for(let i = 0; i < nbD; i++){
-                    yield Math.floor( Math.random()*nbFacesD + 1);
-                }
-            }
-
-            for( let resD of xDy(2,10)){
-                console.log(resD);
-            }
-
+            
         });
     </script>
 </head>
@@ -204,16 +91,28 @@
             <article class="col-lg-12">
                 <header>
                     <h2>
-                        POO : Iterator & generator
+                        POO : Les modules
                     </h2>
                 </header>
                 <main>
                     <p>
-                        Un itérator permet de parcourir les données de l'objet comme s'il s'agissait d'un tableau<br />
-                        Iterator => Itérable => structure d'itération (for / while .forEach() / etc)
+                        Les modules permettent de regrouper les différents fichiers js en un seul appel via 
+                        un fichier js unique.
+                    </p>
+                    <p>
+                        l'avantage est de pouvoir configurer certains fichiers pour certaines page, donc de ne pas appeler 
+                        des "services" inutile.
                     </p>
                     <p>
                         Tout se passe dans le code
+                    </p>
+                    <p id="test">
+
+                    </p>
+                    <p>
+                        <button id="addSpan" class="btn btn-secondary">
+                            Ajouter span testSpan
+                        </button>
                     </p>
                 </main>
             </article>
