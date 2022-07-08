@@ -11,7 +11,114 @@
     <link rel="stylesheet" href="../css/style.css" />
     <script>
         loaded(() => {
-            
+            /*
+            Collections : dictionnaires (ou tableaux associatifs)
+            les index sont en fait des clefs 
+            on peut lses créer à l'aide de la classe Map()
+            */
+            let map = new Map();
+            console.log(map);
+            map.set('lastName', 'Doe');
+            map.set('firstName', 'Jane')
+                .set('email', 'jane.doe@missing.com')
+                .set('phone', '0123456789')
+                .set('detail', 'none');
+
+            map.set('detail', 'scar above left knee');
+            console.log(map);
+            map.forEach( function(value, key, map){
+                console.log(`${key} => ${value}`);
+            });
+
+            console.log(map.size);
+            map.delete('detail');
+            console.log(map);
+
+            if(map.has('phone')){
+                console.log(`le tel de ${map.get('firstName')} ${map.get('lastName')} est ${map.get('phone')}`);
+            }else{
+                console.log(`${map.get('firstName')} ${map.get('lastName')} n'a pas de n° de téléphone enregistré`);
+            }
+
+            /* map.clear(); //supprime toutes les donnée de la map */
+            /*
+            .entries()  => un for of des clefs et des valeurs de la collection
+            .keys()     => un for of des clefs de la collection
+            .values()   => un for of des valeurs de la collection
+
+            Map() implémente déjà un "design pattern" nommé Iterator
+            Un itérator permet de parcourir les données de l'objet comme 
+            s'il s'agissait d'un tableau
+            Iterator => Itérable => structure d'itération (for / while .forEach() / etc)
+            */
+
+            console.log(` ${'KEY'.toUpperCase().padEnd(12, ' ')} | ${'Value'.padStart(24, ' ')} `);
+            console.log(''.padEnd(40, '_'));
+            /*
+            entries renvoi pour chaque élément d'un itérable un tableau 
+            [clef, valeur]
+            let [a, b] = [clef, valeur];
+            => 
+            a === clef
+            b === valeur
+            */
+            for(let [key, value]of map.entries()){
+                console.log(` ${key.toUpperCase().padEnd(12, ' ')} | ${value.padStart(24, ' ')} `);
+            }
+            console.log(''.padEnd(40, '_'));
+            for(let key of map.keys()){
+                console.log(` ${key.toUpperCase().padEnd(12, ' ')} | ${'********'.padStart(24, ' ')} `);
+            }
+            console.log(''.padEnd(40, '_'));
+            for(let value of map.values()){
+                console.log(` ${'****'.toUpperCase().padEnd(12, ' ')} | ${value.padStart(24, ' ')} `);
+            }
+
+            /* tableau à valeur unique sans index (clef) */
+            /* classe Set() */
+            let set = new Set();
+            console.log(set);
+
+            set.add('Jon').add('Aria').add('Sansa').add('Rob').add('Joffrey').add('Sansa').add('Hodor')
+            .add('Brandon').add('Oona');
+
+            console.log(set);
+
+            set.add('Aria');
+            console.log(set);
+
+            console.log(` ${'KEY'.toUpperCase().padEnd(12, ' ')} | ${'Value'.padStart(24, ' ')} `);
+            console.log(''.padEnd(40, '_'));
+            /*
+            entries renvoi pour chaque élément d'un itérable un tableau 
+            [clef, valeur]
+            let [a, b] = [clef, valeur];
+            => 
+            a === clef
+            b === valeur
+            */
+            for(let [key, value]of set.entries()){
+                console.log(` ${key.padEnd(12, ' ')} | ${value.padStart(24, ' ')} `);
+            }
+            console.log(''.padEnd(40, '_'));
+            for(let key of set.keys()){
+                console.log(` ${key.padEnd(12, ' ')} | ${'********'.padStart(24, ' ')} `);
+            }
+            console.log(''.padEnd(40, '_'));
+            for(let value of set.values()){
+                console.log(` ${'****'.padEnd(12, ' ')} | ${value.padStart(24, ' ')} `);
+            }
+
+            set.delete('Joffrey');
+
+            if(!set.has('Joffrey')){
+                console.log('Youpi');
+            }
+
+            /* set.clear() pour supprimer le contenu entier du set */
+
+
+
         });
     </script>
 </head>
@@ -76,6 +183,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="../poo/index.html">POO</a></li>
                             <li><a class="dropdown-item" href="../poo/collection.html">Collection</a></li>
+                            <li><a class="dropdown-item" href="../poo/factory.html">Factory</a></li>
                             <li><a class="dropdown-item" href="../poo/iterator.html">Iterator</a></li>
                             <li><a class="dropdown-item" href="../poo/module.html">Module</a></li>
                             <li><a class="dropdown-item" href="../poo/classe.html">Class</a></li>
