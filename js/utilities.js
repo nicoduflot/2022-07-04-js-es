@@ -64,7 +64,7 @@ function cE(element, ...attributes){
 
 function cEO(element, attributes = {}){
     let newElement = document.createElement(element);
-    for(key in attributes){
+    for(let key in attributes){
         newElement.setAttribute(key, attributes[key]);
     }
     return newElement;

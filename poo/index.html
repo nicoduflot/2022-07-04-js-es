@@ -48,8 +48,6 @@
                 return `${cri} RRRRRRRR !`;
             };
 
-            console.log(Humain.crier());
-
             /* création de mon premier humain */
             let monHumain = new Humain('Uruk', 'Gronk', 20);
 
@@ -59,8 +57,195 @@
             console.log(monHumain.esperanceVie);
             monHumain.dormir();
             console.log(monHumain.esperanceVie);
+            console.log(Humain.crier());
 
+            /* objet literal */
+            let heros = {
+                prenomHeros: 'Herbert',
+                nomHeros: "De Vaucanson",
+                coupSpecial: function(){
+                    return 'Pichenette';
+                }
+            };
+            console.log(heros);
+            console.log(heros.coupSpecial());
+
+            /* 
+            JSON 
             
+            On peu utiliser la syntaxe JSON pour écrire des objets litéraux,
+            seulement la clef des proriétés, au contraire d'un objet litéral, 
+            doit être écrit en chaîne de caractère
+            */
+
+            let herosJson = {
+                'prenomHeros': 'Jason',
+                'nomHeros': 'L\'argonaute',
+                'coupSpecial': function(){
+                    return 'Super force';
+                }
+            };
+
+            console.log(herosJson);
+            console.log(herosJson.coupSpecial());
+
+            /* objet litéral es6 */
+            let u = 'hu hu hu';
+            let objEs6 = {
+                u, /* semblable à u: u */
+                foo: 'bar',
+                bar: 13.5,
+                help(){
+                    return 'I need somebody, I mean anybody !';
+                }
+            };
+
+            console.log(objEs6);
+            console.log(objEs6.u);
+            objEs6.u = 'COOOOOOOOOOOOL !';
+            console.log(`objEs6.u : ${objEs6.u}, u : ${u}`);
+            u = 'ha ha ha';
+            console.log(`objEs6.u : ${objEs6.u}, u : ${u}`);
+
+            /* les classes en JS */
+            /*
+            Les classes sont en es6
+
+            contrairement aux langages robustes (C++, Java...)
+            on ne peut pas déclarer les attributs en tant 
+            qu'attribut privés
+
+            on utilise une convention d'écriture pour préciser 
+            qu'un attribut sera considéré comme privé : il est préfixé d'un _
+            */
+
+            /* créer une classe permet de "regrouper" la définition d'un objet */
+            class Voiture{
+                /* 
+                un objet a besoin d'un constructeur pour exister, 
+                on le défini dans la classe. C'est lui qui va créer l'objet 
+                quand on invoquera une instance de la classe
+                */
+                constructor(marque, modele, couleur){
+                    this._marque = marque;
+                    /* 
+                    mettre un _ devant une propriété d'une classe 
+                    indique qu'elle doit être considérée comme privée.
+                    il faudra utiliser des méthodes pour l'utiliser :
+                    un getter : une méthode pour aller récupérer la proriété (to get : chercher)
+                    un setter : une méthode pour mettre à jour la propriété (to set : régler)
+                    */
+                   this.modele = modele;
+                   this.couleur = couleur;
+                }
+
+                /*
+                généralement, quand on a défini le constructeur de l'objet, 
+                on va en premier définir les getter et setter des propriétés privées
+                */
+
+                /* getter de marque */
+                get getMarque(){
+                    return this._marque;
+                }
+
+                /* setter de marque */
+                set setMarque(marque){
+                    this._marque = marque;
+                    return true;
+                }
+
+                /* les méthodes de la voiture */
+                demarrer(){
+                    return `la ${this.constructor.name} démarre`;
+                }
+
+                /* 
+                A la création du constructeur, une constante 
+                this.constructor.name est créée, elle contient 
+                le nom de la classe qui a construit l'objet
+                */
+                showConstructor(){
+                    return this.constructor;
+                }
+
+                /* toutes les voiture klaxonnent */
+                /*
+                méthode statique
+                Appartient à la classe, partagée entre toutes 
+                les instances d'une classe identique MAIS :
+                elle ne peut pas être appelée à partir d'une instance, 
+                seulement à partir de la classe directement
+                
+                avant es6 on créait une méthode statique comme ceci
+                Voiture.klaxonner = function(){};
+                appel : Voiture.klaxonner();
+                */
+                static klaxonner(){
+                    return 'POUEEEET ! POUEEEET !';
+                }
+            }
+
+            class Ambulance extends Voiture{
+                /*
+                la classe Ambulance est étendue de Voiture
+                On n'a pas besoin de réécrire tout ce qui fait de l'ambulance une voiture
+                il faut un constructeur, il doit être déclarer de la même 
+                manière que la classe parente
+                */
+                constructor(marque, modele, couleur){
+                    super(marque, modele, couleur);
+                    if('blanc' !== this.couleur.toLowerCase()){
+                        this.couleur = 'Blanc';
+                    }
+                    this.sirene = false;
+                }
+
+                /*
+                on peut surcharger - redéfinir - une méthode hérité de la classe mère
+                */
+                demarrer(){
+                    let bruit = '';
+                    bruit = (this.sirene)? 'PIN PON PIN PON !' : 'Vrrrrr rrrrr rrrrr';
+                    return `${super.demarrer()} ${bruit}`;
+                }
+
+                /* on peut aussi redéfinir les méthodes statiques */
+                static klaxonner(){
+                    return 'POUEEEEEEEEEEEEEEEEEEEEEEEEEEET !'
+                }
+
+
+            }
+
+            let maVoiture = new Voiture('Renault', 'Twingo', 'Vert Poubelle');
+            console.log(maVoiture);
+            console.log(maVoiture.showConstructor());
+            console.log(maVoiture.showConstructor().name);
+            console.log(maVoiture.getMarque);
+            console.log(maVoiture);
+            console.log(maVoiture.demarrer());
+            maVoiture.setMarque = 'Peugeot';
+            maVoiture.modele = '205';
+            maVoiture.couleur = 'Rouge';
+            console.log(maVoiture);
+            console.log(Voiture.klaxonner());
+
+            let monAmbulance = new Ambulance('Mercedes', 'Vito', 'Bleu');
+            console.log(monAmbulance);
+            console.log(monAmbulance.showConstructor());
+            console.log(monAmbulance.showConstructor().name);
+            console.log(monAmbulance.getMarque);
+            console.log(monAmbulance.demarrer());
+            monAmbulance.sirene = true;
+            console.log(monAmbulance.demarrer());
+            console.log(Ambulance.klaxonner());
+
+            // quelques méthodes static natives dans JS
+            console.log(`2 puissance 3 : ${Math.pow(2,3)}`);
+            let dateNow = new Date();
+            console.log(`dateNow : ${dateNow}`);
+            console.log(`Date.now() : ${Date.now()}`);
 
         });
     </script>
